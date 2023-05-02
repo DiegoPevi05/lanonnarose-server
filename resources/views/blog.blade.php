@@ -6,6 +6,20 @@
     <form method="POST" action="{{ route('blogs.storeBlog') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
+            <label for="is_important">Quieres que salga en la pagina principal?</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="isImportant" id="is_important_true" value="1" {{ old('isImportant') == '1' ? 'checked' : '' }}>
+                <label class="form-check-label" for="is_important_true">Si</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="isImportant" id="is_important_false" value="0" {{ old('isImportant') == '0' ? 'checked' : '' }}>
+                <label class="form-check-label" for="is_important_false">No</label>
+            </div>
+            @error('isImportant')
+                <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="form-group">
             <label for="title_es">Titulo en español</label>
             <input type="text" class="form-control @error('title_es') is-invalid @enderror" id="title_es" name="title_es">
             @error('title_es')
@@ -103,6 +117,20 @@
         @csrf
         @method('PUT')
         <div class="form-group">
+            <label for="is_important">Quieres que salga en la pagina principal?</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="is_important" id="is_important_true" value="1" {{ $blog->isImportant ? 'checked' : '' }}>
+                <label class="form-check-label" for="is_important_true">Si</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="is_important" id="is_important_false" value="0" {{ !$blog->isImportant ? 'checked' : '' }}>
+                <label class="form-check-label" for="is_important_false">Si</label>
+            </div>
+            @error('is_important')
+                <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="form-group">
             <label for="title_es">Titulo en español</label>
             <input type="text" class="form-control @error('title_es') is-invalid @enderror" id="title_es" name="title_es" value="{{ old('title_es', $blog->title_es) }}">
             @error('title_es')
@@ -118,42 +146,34 @@
         </div>
         <div class="form-group">
             <label for="subTitle_es">Subtitulo en español</label>
-            <textarea class="form-control @error('subTitle_es') is-invalid @enderror" id="subTitle_es" name="subTitle_es">
-             {{ old('subTitle_es', $blog->subTitle_es) }}
-            </textarea>
+            <textarea class="form-control @error('subTitle_es') is-invalid @enderror" id="subTitle_es" name="subTitle_es">{{ old('subTitle_es', $blog->subTitle_es) }}</textarea>
             @error('subTitle_es')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="subTitle_en">Subtitulo en ingles</label>
-            <textarea class="form-control @error('subTitle_en') is-invalid @enderror" id="subTitle_en" name="subTitle_en">
-             {{ old('subTitle_en', $blog->subTitle_en) }}
-            </textarea>
+            <textarea class="form-control @error('subTitle_en') is-invalid @enderror" id="subTitle_en" name="subTitle_en">{{ old('subTitle_en', $blog->subTitle_en) }}</textarea>
             @error('subTitle_en')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="description_es">Descripciòn en español</label>
-            <textarea class="form-control @error('description_es') is-invalid @enderror" id="description_es" name="description_es">
-             {{ old('description_es', $blog->description_es) }}
-            </textarea>
+            <textarea class="form-control @error('description_es') is-invalid @enderror" id="description_es" name="description_es">{{ old('description_es', $blog->description_es) }}</textarea>
             @error('description_es')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="description_en">Descripciòn en ingles</label>
-            <textarea class="form-control @error('description_en') is-invalid @enderror" id="description_en" name="description_en">
-             {{ old('description_en', $blog->description_en) }}
-            </textarea>
+            <textarea class="form-control @error('description_en') is-invalid @enderror" id="description_en" name="description_en">{{ old('description_en', $blog->description_en) }}</textarea>
             @error('description_en')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
         </div>
         <div class="form-group">
-            <label for="bulletpoints_es">Bullet Points en español</label>
+            <label for="bulletpoints_es">Bullet Points en español  (separados por comas)</label>
             <input type="text" class="form-control @error('bulletpoints_es') is-invalid @enderror" id="bulletpoints_es" name="bulletpoints_es"
             value="{{ old('bulletpoints_es', implode(',', json_decode($blog->bulletpoints_es))) }}"
         >
@@ -162,7 +182,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="bulletpoints_en">Bullet Points en ingles</label>
+            <label for="bulletpoints_en">Bullet Points en ingles (separados por comas)</label>
             <input type="text" class="form-control @error('bulletpoints_en') is-invalid @enderror" id="bulletpoints_en" name="bulletpoints_en"
             value="{{ old('bulletpoints_en', implode(',', json_decode($blog->bulletpoints_en))) }}"
         >

@@ -23,6 +23,7 @@ class blog extends Model
             'image3',
             'image4',
             'bulletpoints_es',
-            'bulletpoints_en'
+            'bulletpoints_en',
+            'isImportant'
         ];
 }

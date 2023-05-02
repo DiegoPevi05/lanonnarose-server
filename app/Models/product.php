@@ -12,6 +12,8 @@ class product extends Model
     protected $table = 'products';
 
         protected $fillable = [
+            'section_es',
+            'section_en',
             'title_es',
             'title_en',
             'name',
@@ -19,6 +21,7 @@ class product extends Model
             'shortDescription_en',
             'description_es',
             'description_en',
-            'imageUrl'
+            'imageUrl',
+            'isImportant'
         ];
 }

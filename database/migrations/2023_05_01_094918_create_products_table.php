@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('section_es',255)->default('N/A');
+            $table->string('section_en',255)->default('N/A');
             $table->string('title_es',255)->default('N/A');
             $table->string('title_en',255)->default('N/A');
             $table->text('shortDescription_es',255)->default('N/A');
@@ -20,6 +22,7 @@ return new class extends Migration
             $table->text('description_es')->default('N/A');
             $table->text('description_en')->default('N/A');
             $table->longText('imageUrl')->default('N/A');
+            $table->string('isImportant',1)->default('0');
             $table->timestamps();
         });
     }

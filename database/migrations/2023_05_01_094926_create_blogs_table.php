@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('image2')->default('N/A');
             $table->longText('image3')->default('N/A');
             $table->longText('image4')->default('N/A');
+            $table->string('isImportant',1)->default('0');
             $table->json('bulletpoints_es');
             $table->json('bulletpoints_en');
             $table->timestamps();

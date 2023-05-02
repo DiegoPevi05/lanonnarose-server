@@ -142,6 +142,12 @@ class BlogController extends Controller
         $blog->bulletpoints_es         = json_encode($bulletpoints_es);
         $blog->bulletpoints_en         = json_encode($bulletpoints_en);
 
+        if ($request->isImportant == '1'){
+            $blog->isImportant = '1';
+        }else{
+            $blog->isImportant = '0';
+        }
+
         try {
             $blog->save();
         } catch (\Exception $e) {
@@ -305,6 +311,12 @@ class BlogController extends Controller
 
         $blog->bulletpoints_es         = json_encode($bulletpoints_es);
         $blog->bulletpoints_en         = json_encode($bulletpoints_en);
+
+        if ($request->isImportant == '1'){
+            $blog->isImportant = '1';
+        }else{
+            $blog->isImportant = '0';
+        }
 
         try {
             $blog->save();

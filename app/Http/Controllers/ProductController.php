@@ -33,6 +33,7 @@ class ProductController extends Controller
         $product = new product;
 
         $validatedData = $request->validate([
+            'section_en'=> 'required|string|max:255',
             'title_es' => 'required|string|max:255',
             'title_en'=> 'required|string|max:255',
             'shortDescription_es' => 'required|string',
@@ -40,6 +41,8 @@ class ProductController extends Controller
             'description_es' => 'required|string',
             'description_en'=> 'required|string'
         ], [
+
+            'section_en.required' => 'La secciòn es requerido.',
             'title_es.required' => 'El titulo inicial es requerido.',
             'title_en.required' => 'El titulo es requerido.',
             'shortDescription_es.required' => 'El contenido es requerido.',
@@ -62,12 +65,32 @@ class ProductController extends Controller
         }
 
 
+        $product->section_en                  = $request->section_en;
+        if($request->section_en == "Cakes"){
+          $product->section_es                = "Pasteles";
+
+        }else if($request->section_en == "Desserts"){
+          $product->section_es                = "Postres";
+        }else if($request->section_en == "Others"){
+          $product->section_es                = "Otros";
+        }else{
+          $product->section_es                = "Pasteles";
+          $product->section_en                = "Cakes";
+        }
+
+
         $product->title_es                = $request->title_es;
         $product->title_en                = $request->title_en;
         $product->shortDescription_es     = $request->shortDescription_es;
         $product->shortDescription_en     = $request->shortDescription_en;
         $product->description_es          = $request->description_es;
         $product->description_en          = $request->description_en;
+
+        if ($request->isImportant == "1"){
+            $product->isImportant = "1";
+        }else{
+            $product->isImportant = "0";
+        }
 
         if($fileName != ''){
            $product->imageUrl = '/images/products/'. $fileName;
@@ -108,6 +131,7 @@ class ProductController extends Controller
         $product = product::findOrFail($id);
 
         $validatedData = $request->validate([
+            'section_en'=> 'required|string|max:255',
             'title_es' => 'required|string|max:255',
             'title_en'=> 'required|string|max:255',
             'shortDescription_es' => 'required|string',
@@ -115,6 +139,7 @@ class ProductController extends Controller
             'description_es' => 'required|string',
             'description_en'=> 'required|string'
         ], [
+            'section_en.required' => 'La secciòn es requerido.',
             'title_es.required' => 'El titulo inicial es requerido.',
             'title_en.required' => 'El titulo es requerido.',
             'shortDescription_es.required' => 'El contenido es requerido.',
@@ -141,6 +166,19 @@ class ProductController extends Controller
             $file->move($destinationPath,$fileName);
         }
 
+        $product->section_en                = $request->section_en;
+        if($request->section_en == "Cakes"){
+          $product->section_es                = "Pasteles";
+
+        }else if($request->section_en == "Desserts"){
+          $product->section_es                = "Postres";
+        }else if($request->section_en == "Others"){
+          $product->section_es                = "Otros";
+        }else{
+          $product->section_es                = "Pasteles";
+          $product->section_en                = "Cakes";
+        }
+
         $product->title_es                = $request->title_es;
         $product->title_en                = $request->title_en;
         $product->shortDescription_es     = $request->shortDescription_es;
@@ -153,9 +191,17 @@ class ProductController extends Controller
              $product->imageUrl = '/images/products/'. $fileName;
         }
 
+        if ($request->isImportant == "1"){
+            $product->isImportant = "1";
+        }else{
+            $product->isImportant = "0";
+        }
+
         try {
 
         $product->update([
+                'section_es' => $product->section_es,
+                'section_en' => $product->section_en,
                 'title_es' => $product->title_es,
                 'title_en' => $product->title_en,
                 'shortDescription_es' => $product->shortDescription_es,
@@ -163,6 +209,7 @@ class ProductController extends Controller
                 'description_es' => $product->description_es,
                 'description_en' => $product->description_en,
                 'imageUrl' => $product->imageUrl,
+                'isImportant' => $product->isImportant
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while updating the News Section. Please try again.']);
