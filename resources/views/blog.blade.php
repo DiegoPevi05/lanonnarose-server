@@ -62,14 +62,14 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="bulletpoints_es">Bullet Points en español</label>
+            <label for="bulletpoints_es">Bullet Points en español  (separados por comas)</label>
             <input type="text" class="form-control @error('bulletpoints_es') is-invalid @enderror" id="bulletpoints_es" name="bulletpoints_es">
             @error('bulletpoints_es')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
         </div>
         <div class="form-group">
-            <label for="bulletpoints_en">Bullet Points en ingles</label>
+            <label for="bulletpoints_es">Bullet Points en ingles  (separados por comas)</label>
             <input type="text" class="form-control @error('bulletpoints_en') is-invalid @enderror" id="bulletpoints_en" name="bulletpoints_en">
             @error('bulletpoints_en')
                 <span class="invalid-feedback">{{ $message }}</span>
@@ -119,12 +119,12 @@
         <div class="form-group">
             <label for="is_important">Quieres que salga en la pagina principal?</label><br>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="is_important" id="is_important_true" value="1" {{ $blog->isImportant ? 'checked' : '' }}>
+                <input class="form-check-input" type="radio" name="isImportant" id="is_important_true" value="1" {{ $blog->isImportant ? 'checked' : '' }}>
                 <label class="form-check-label" for="is_important_true">Si</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="is_important" id="is_important_false" value="0" {{ !$blog->isImportant ? 'checked' : '' }}>
-                <label class="form-check-label" for="is_important_false">Si</label>
+                <input class="form-check-input" type="radio" name="isImportant" id="is_important_false" value="0" {{ !$blog->isImportant ? 'checked' : '' }}>
+                <label class="form-check-label" for="is_important_false">No</label>
             </div>
             @error('is_important')
                 <span class="invalid-feedback">{{ $message }}</span>

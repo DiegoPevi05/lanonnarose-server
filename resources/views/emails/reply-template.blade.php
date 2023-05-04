@@ -325,7 +325,7 @@ img {
 <tr>
 <td class="header">
 <a href="https://www.lanonnarose.com/" style="display: inline-block;">
-<img src="https://www.lanonnarose.com/static/media/M_A_LOGO_1_2.9d5a0e7ddab084ffb5b6.png" class="logo" alt="La Nonna Rose">
+<img src="https://lanonnarose.com/logo.png" class="logo" alt="La Nonna Rose">
 </a>
 </td>
 </tr>
@@ -340,7 +340,7 @@ img {
     <h1>New Form of Contact!</h1><br>
     <p>Name: {{ $name }}</p><br>
     <p>Email: {{ $email }}</p><br>
-    <p>Message: {{ $message }}</p><br>
+    <p>Message: {{ $content }}</p><br>
 </td>
 </tr>
 </table>

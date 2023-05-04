@@ -21,23 +21,15 @@ class EmailController extends Controller
 
         $name = $request->input('name');
         $email = $request->input('email');
-        $message = $request->input('message');
-        $language = $request->has('language') ? $request->input('language') : 'en';
+        $content = $request->input('message');
+        // Check for the "language" parameter
+        $language = $request->has('language') && $request->input('language') === 'es' ? 'es' : 'en';
 
-        $mailable = new SFMailable($name);
-        if($language == 'es'){
-            $mailable = new SFMailableEs($name);
-        }
-        Mail::to($email)
-            ->send($mailable);
+        $mailable = $language === 'es' ? new SFMailableEs($name) : new SFMailable($name);
+        Mail::to($email)->send($mailable);
 
-        $mailableReply = new SFMailableReply($name, $email, $message);
-        if($language == 'es'){
-           $mailableReply = new SFMailableReplyEs($name, $email, $message);
-        }
+        $mailableReply = $language === 'es' ? new SFMailableReplyEs($name, $email, $content) : new SFMailableReply($name, $email, $content);
+        Mail::to('info@lanonnarose.com')->send($mailableReply);
 
-        Mail::to('info@lanonnarose.com')
-            //->cc(['mariela@slanonnarose.com'])
-            ->send($mailableReply);
     }
 }

@@ -325,7 +325,7 @@ img {
 <tr>
 <td class="header">
 <a href="https://www.lanonnarose.com/" style="display: inline-block;">
-<img src="https://www.lanonnarose.com/static/media/M_A_LOGO_1_2.9d5a0e7ddab084ffb5b6.png" class="logo" alt="La Nonna Rose">
+<img src="https://lanonnarose.com/logo.png" class="logo" alt="La Nonna Rose">
 </a>
 </td>
 </tr>

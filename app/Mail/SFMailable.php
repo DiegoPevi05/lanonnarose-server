@@ -23,6 +23,6 @@ class SFMailable extends Mailable
         return $this->view('emails.template', [
                             'name' => $this->name,
                            ])
-                    ->subject('Gracias por contactarnos');
+                    ->subject('Thanks for Contact Us');
     }
 }

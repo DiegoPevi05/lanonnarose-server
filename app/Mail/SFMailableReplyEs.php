@@ -15,13 +15,13 @@ class SFMailableReplyEs extends Mailable
 
     public $name;
     public $email;
-    public $message;
+    public $content;
 
-    public function __construct($name, $email, $message)
+    public function __construct($name, $email, $content)
     {
         $this->name = $name;
         $this->email = $email;
-        $this->message = $message;
+        $this->content = $content;
     }
 
     public function build()
@@ -31,7 +31,7 @@ class SFMailableReplyEs extends Mailable
         return $this->view('emails.reply-template-es', [
                             'name' => $this->name,
                             'email' => $this->email,
-                            'message' => $this->message,
+                            'content' => $this->content,
                            ])
                     ->subject($Subject);
     }
