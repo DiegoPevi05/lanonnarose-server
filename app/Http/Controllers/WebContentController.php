@@ -73,10 +73,10 @@ class WebContentController extends Controller
         $webContent = webcontent::findOrFail($id);
         $validatedData = $request->validate([
             'content_es'=> 'required|string',
-            'content_en'=> 'required|string'
+            'content_en'=> 'required|string',
         ], [
             'content_es.required' => 'El contenido en español es requerido.',
-            'content_en.required' => 'El contenido en ingles es requerido.'
+            'content_en.required' => 'El contenido en ingles es requerido.',
         ]);
 
         try {
